@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Prototype </title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<h1> Bind plus Map </h1>
+		
+		<script>
+	
+			
+			let list = function() {
+				return [].slice.call(arguments)
+			}
+
+			let myBind =  function (func, context) {
+				let bindArr = [].slice.call(arguments, 2);
+			 	return function () {
+			 		let funcArg = [].slice.call(arguments);
+			 		return func.apply(context, bindArr.concat(funcArg));
+				}
+			}
+
+			let leading = myBind(list, undefined);
+
+			let list1 = leading(1,2,3,);
+			let list2 = leading('dfgdfg','dfdf','gd');
+			 console.log(list1);
+			  console.log(list2);
+
+
+
+//------------------------------------MAP--------------------------------------------
+
+			let arr = [1, 2, 3, 4, 5, undefined, 7, undefined, undefined, 20];
+			
+			arr[12] = 34;
+			function myMap (arr, func) {
+				let newArr = [];
+				for (let i = 0; i < arr.length; i++) {
+					if (arr[i] != undefined){
+						newArr.push(func(arr[i]));
+					}	
+				}
+				return newArr;
+			}
+
+			let funcArr =  function(n) { 
+				return n * 2;
+			}
+
+			let arrSecond = myMap(arr, funcArr);
+			console.log(arr);
+			console.log(arrSecond);
+		
+		</script>
+	</body>
+</html>
